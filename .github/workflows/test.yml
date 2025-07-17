@@ -25,7 +25,6 @@ jobs:
         init-shell: bash
         cache-environment: true
         post-cleanup: 'all'
-        # generate-run-shell: false
 
     - name: Program test
       run: make test_program
