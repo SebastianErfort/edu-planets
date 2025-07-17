@@ -1,3 +1,5 @@
+[![Test](https://github.com/SebastianErfort/edu-planets/actions/workflows/test.yml/badge.svg?event=push)](https://github.com/SebastianErfort/edu-planets/actions/workflows/test.yml)
+
 # planets: A little example project we use in teaching
 
 This is part of https://coderefinery.github.io/research-software-engineering/.
