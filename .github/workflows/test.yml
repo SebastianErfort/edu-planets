@@ -31,9 +31,15 @@ jobs:
       run: make test_program
       shell: bash -el {0}
 
+    - name: debug
+      run: |
+        micromamba list
+        micromamba activate
+        micromamba list
+
     - name: pytest
       run: |
-        conda list
+        micromamba activate
         python -m pip install --upgrade pip
         if [ -f requirements-dev.txt ]; then pip install -r requirements-dev.txt; fi
         make test_pytest
