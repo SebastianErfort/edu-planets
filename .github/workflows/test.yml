@@ -27,15 +27,16 @@ jobs:
         post-cleanup: 'all'
         # generate-run-shell: false
 
-    - name: Program test
-      run: make test_program
-      # shell: bash -el {0}
-
     - name: debug
       run: |
         micromamba list
         micromamba activate
         micromamba list
+      shell: micromamba-shell {0}
+
+    - name: Program test
+      run: make test_program
+      # shell: bash -el {0}
 
     - name: pytest
       run: |
