@@ -2,7 +2,7 @@ name: Test
 
 on:
   push:
-    branches: [ main ]
+  #   branches: [ main ]
   pull_request:
     branches: [ main ]
 
@@ -18,24 +18,25 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v4
 
-    - uses: mamba-org/setup-micromamba@v1
+    - uses: mamba-org/setup-micromamba@v2
       with:
-        micromamba-version: '1.5.8-0' # any version from https://github.com/mamba-org/micromamba-releases
+        micromamba-version: '2.0.5-0' # any version from https://github.com/mamba-org/micromamba-releases
         environment-file: environment.yml
         init-shell: bash
         cache-environment: true
         post-cleanup: 'all'
-        generate-run-shell: false
 
     - name: Program test
       run: make test_program
-      shell: bash -el {0}
+      shell: micromamba-shell {0}
 
     - name: pytest
       run: |
+        micromamba activate
         python -m pip install --upgrade pip
         if [ -f requirements-dev.txt ]; then pip install -r requirements-dev.txt; fi
         make test_pytest
+      shell: micromamba-shell {0}
 
     - name: Create Coverage
       if: ${{ github.event_name == 'pull_request' }}
