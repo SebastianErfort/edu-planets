@@ -27,16 +27,9 @@ jobs:
         post-cleanup: 'all'
         # generate-run-shell: false
 
-    - name: debug
-      run: |
-        micromamba list
-        micromamba activate
-        micromamba list
-      shell: micromamba-shell {0}
-
     - name: Program test
       run: make test_program
-      # shell: bash -el {0}
+      shell: micromamba-shell {0}
 
     - name: pytest
       run: |
@@ -44,6 +37,7 @@ jobs:
         python -m pip install --upgrade pip
         if [ -f requirements-dev.txt ]; then pip install -r requirements-dev.txt; fi
         make test_pytest
+      shell: micromamba-shell {0}
 
     - name: Create Coverage
       if: ${{ github.event_name == 'pull_request' }}
