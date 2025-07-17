@@ -27,17 +27,15 @@ jobs:
         post-cleanup: 'all'
         generate-run-shell: false
 
-    - name: Run tests
-      run: |
-        ./test.sh
+    - name: Program test
+      run: make test_program
       shell: bash -el {0}
 
-    - name: Test coverage
+    - name: pytest
       run: |
         python -m pip install --upgrade pip
-        pip install flake8 pytest pytest-cov
-        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-        pytest --cov-report "xml:coverage.xml" --cov=.
+        if [ -f requirements-dev.txt ]; then pip install -r requirements-dev.txt; fi
+        make test_pytest
 
     - name: Create Coverage
       if: ${{ github.event_name == 'pull_request' }}
