@@ -33,6 +33,7 @@ jobs:
 
     - name: pytest
       run: |
+        conda list
         python -m pip install --upgrade pip
         if [ -f requirements-dev.txt ]; then pip install -r requirements-dev.txt; fi
         make test_pytest
